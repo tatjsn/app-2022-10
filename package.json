@@ -13,6 +13,7 @@
     "vercel": "^28.4.12"
   },
   "dependencies": {
-    "@google-cloud/firestore": "^6.4.1"
+    "@google-cloud/firestore": "^6.4.1",
+    "nunjucks": "^3.2.3"
   }
 }
