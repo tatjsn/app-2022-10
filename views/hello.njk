@@ -8,7 +8,7 @@
           {%  if item.message.type == "text" %}
             <li>{{ item.message.text }}</li>
           {%  elif item.message.type == "sticker" %}
-            <li>Sticker: {{ item.message.xxx | join(",") }}</li>
+            <li>Sticker: {{ item.message.keywords | join(",") }}</li>
           {%  elif item.message.type == "image" %}
             <li>Image: {{ item.message.id }}</li>
           {% else %}
