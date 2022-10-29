@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const keyPath = path.join(process.cwd(), 'secrets', 'firebase.json');
   process.env.GOOGLE_APPLICATION_CREDENTIALS = keyPath;
   const firestore = new Firestore();
-  const docRefs = await firestore.collection('posts').listDocuments();
+  const docRefs = await firestore.collection('hooks').listDocuments();
   const docs = await firestore.getAll(...docRefs);
   const items = docs.map(doc => doc.data());
 

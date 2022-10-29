@@ -4,7 +4,19 @@
     <h1>Hello from server</h1>
     <ul>
       {% for item in items %}
-        <li>{{ item.title }}</li>
+        {%  if item.type == "message" %}
+          {%  if item.message.type == "text" %}
+            <li>{{ item.message.text }}</li>
+          {%  elif item.message.type == "sticker" %}
+            <li>Sticker: {{ item.message.xxx | join(",") }}</li>
+          {%  elif item.message.type == "image" %}
+            <li>Image: {{ item.message.id }}</li>
+          {% else %}
+            <li>Unknown message.type: {{ item.message.type }}</li>
+          {% endif %}
+        {% else %}
+          <li> Unknown type: {{ item.type }}</li>
+        {% endif %}
       {% endfor %}
     </ul>
   </body>
