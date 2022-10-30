@@ -6,7 +6,7 @@
         {%-  if item.message.type == "text" -%}
           {{ item.message.text }}
         {%-  elif item.message.type == "sticker" -%}
-          Sticker: {{ item.message.keywords | join(",") }}
+          Sticker: {{ item.message.keywords | join(", ") }}
         {%-  elif item.message.type == "image" -%}
           Image: {{ item.message.id }}
         {%- else -%}
