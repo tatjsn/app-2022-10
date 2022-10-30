@@ -1,30 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <h1>Hello from server</h1>
-    <ul>
-      {% for item in items %}
-        <li>
-          <p style="white-space: pre-wrap">
-          {%-  if item.type == "message" -%}
-            {%-  if item.message.type == "text" -%}
-              {{ item.message.text }}
-            {%-  elif item.message.type == "sticker" -%}
-              Sticker: {{ item.message.keywords | join(",") }}
-            {%-  elif item.message.type == "image" -%}
-              Image: {{ item.message.id }}
-            {%- else -%}
-              Unknown message.type: {{ item.message.type }}
-            {%- endif -%}
-          {%- else -%}
-            Unknown type: {{ item.type }}
-          {%- endif -%}
-          </p>
-          <p>
-            {{ item.timestamp | date }}
-          </p>
-        </li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% set content %}
+{% for item in items %}
+  <article class="pt-10">
+    <p class="text-xl whitespace-pre-wrap">
+      {%-  if item.type == "message" -%}
+        {%-  if item.message.type == "text" -%}
+          {{ item.message.text }}
+        {%-  elif item.message.type == "sticker" -%}
+          Sticker: {{ item.message.keywords | join(",") }}
+        {%-  elif item.message.type == "image" -%}
+          Image: {{ item.message.id }}
+        {%- else -%}
+          Unknown message.type: {{ item.message.type }}
+        {%- endif -%}
+      {%- else -%}
+        Unknown type: {{ item.type }}
+      {%- endif -%}
+    </p>
+    <p class="text-xs pt-2">
+      {{ item.timestamp | date }}
+    </p>
+  </article>
+{% endfor %}
+{% endset %}
+
+{% include "layout.njk" %}
