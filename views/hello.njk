@@ -1,7 +1,7 @@
 {% set content %}
 {% for item in items %}
   <article class="pt-10">
-    <p class="text-xl whitespace-pre-wrap">
+    <p class="text-xl whitespace-pre-wrap break-words">
       {%-  if item.type == "message" -%}
         {%-  if item.message.type == "text" -%}
           {{ item.message.text }}
