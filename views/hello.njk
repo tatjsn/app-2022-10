@@ -1,21 +1,29 @@
 {% set content %}
 {% for item in items %}
   <article class="pt-10">
-    <p class="text-xl whitespace-pre-wrap break-words">
-      {%-  if item.type == "message" -%}
-        {%-  if item.message.type == "text" -%}
-          {{ item.message.text }}
-        {%-  elif item.message.type == "sticker" -%}
+    {%  if item.type == "message" %}
+      {%  if item.message.type == "text" %}
+        <p class="text-xl whitespace-pre-wrap break-words">
+          {{- item.message.text -}}
+        </p>
+      {%  elif item.message.type == "sticker" %}
+        <p class="text-xl whitespace-pre-wrap break-words">
           Sticker: {{ item.message.keywords | join(", ") }}
-        {%-  elif item.message.type == "image" -%}
-          Image: {{ item.message.id }}
-        {%- else -%}
+        </p>
+      {%  elif item.message.type == "image" %}
+        <p class="border-2 rounded-lg overflow-hidden">
+          <img class="w-full" src="/images/{{item.message.id}}" />
+        </p>
+      {% else %}
+        <p class="text-xl whitespace-pre-wrap break-words">
           Unknown message.type: {{ item.message.type }}
-        {%- endif -%}
-      {%- else -%}
+        </p>
+      {% endif %}
+    {% else %}
+      <p class="text-xl whitespace-pre-wrap break-words">
         Unknown type: {{ item.type }}
-      {%- endif -%}
-    </p>
+      </p>
+    {% endif %}
     <p class="text-xs pt-2">
       {{ item.timestamp | date }}
     </p>
