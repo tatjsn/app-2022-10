@@ -1,4 +1,4 @@
-import firestore from './client/firestore.js';
+import firestore from './clients/firestore.js';
 
 export default async function handler(req, res) {
   const hooks = firestore().collection('hooks');
