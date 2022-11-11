@@ -1,16 +1,10 @@
 import path from 'path';
-import { Firestore } from '@google-cloud/firestore';
 import { Environment, FileSystemLoader} from 'nunjucks';
 
+import firestore from './clients/firestore.js';
+
 export default async function handler(req, res) {
-  const firestore = new Firestore({
-    projectId: process.env.G_PROJECT_ID,
-    credentials:{
-      'client_email': process.env.G_CLIENT_EMAIL,
-      'private_key': process.env.G_PRIVATE_KEY,
-    },
-  });
-  const query = await firestore
+  const query = await firestore()
     .collection('hooks')
     .orderBy('timestamp', 'desc')
     .limit(20)
