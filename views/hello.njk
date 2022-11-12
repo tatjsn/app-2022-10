@@ -7,7 +7,7 @@
           {{- item.message.text -}}
         </p>
       {%  elif item.message.type == "sticker" %}
-        <p class="text-xl whitespace-pre-wrap break-words">
+        <p class="text-xl">
           Sticker: {{ item.message.keywords | join(", ") }}
         </p>
       {%  elif item.message.type == "image" %}
@@ -15,12 +15,12 @@
           <img class="w-full" src="/images/{{item.message.id}}" />
         </p>
       {% else %}
-        <p class="text-xl whitespace-pre-wrap break-words">
+        <p class="text-xl">
           Unknown message.type: {{ item.message.type }}
         </p>
       {% endif %}
     {% else %}
-      <p class="text-xl whitespace-pre-wrap break-words">
+      <p class="text-xl">
         Unknown type: {{ item.type }}
       </p>
     {% endif %}
