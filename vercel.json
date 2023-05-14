@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/hello", "destination": "/api/hello" },
-    { "source": "/images/:messageId", "destination": "/api/images" }
+    { "source": "/images/:messageId", "destination": "/api/images" },
+    { "source": "/videos/:messageId", "destination": "/api/images" }
   ]
 }
