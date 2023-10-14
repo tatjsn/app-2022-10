@@ -1,4 +1,5 @@
 import { Issuer } from 'openid-client';
+import cookie from 'cookie';
 
 export default async function handler(req, res) {
   const auth0Issuer = await Issuer.discover(process.env.AUTH0_ISSUER_URL);
@@ -7,11 +8,11 @@ export default async function handler(req, res) {
     client_secret: process.env.AUTH0_CLIENT_SECRET,
   });
 
-  const params = client.callbackParams(req);
+  const params = client.callbackParams(`http://blah${req.url}`);
   const tokenSet = await client.callback(
     process.env.AUTH0_REDIRECT_URI,
     params,
-    { nonce: req.query.nonce, state: req.query.state }
+    { nonce: 'your-random-nonce', state: params.state }
   );
 
   res.setHeader(

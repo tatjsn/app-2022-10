@@ -9,13 +9,12 @@ export default async function handler(req, res) {
 
   const state = 'your-random-state';
   const nonce = 'your-random-nonce';
-  const callbackUrl = 'https://your-vercel-app-url/api/callback';
 
   const authorizationUrl = client.authorizationUrl({
     scope: 'openid profile email',
     state,
     nonce,
-    redirect_uri: callbackUrl,
+    redirect_uri: process.env.AUTH0_REDIRECT_URI,
   });
 
   res.redirect(authorizationUrl);
