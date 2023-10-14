@@ -10,13 +10,13 @@
   "author": "tatjsn <tatjsn@gmail.com> (https://github.com/tatjsn/)",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0-canary.16",
     "tailwindcss": "^3.2.1",
     "vercel": "^28.4.12"
   },
   "dependencies": {
     "@google-cloud/firestore": "^6.4.1",
     "node-fetch": "^3.2.10",
-    "nunjucks": "^3.2.3"
+    "nunjucks": "^3.2.3",
+    "openid-client": "^5.6.1"
   }
 }
