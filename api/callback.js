@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     client_secret: process.env.AUTH0_CLIENT_SECRET,
   });
 
-  const params = client.callbackParams(`http://blah${req.url}`);
+  const params = client.callbackParams(req.url);
   const tokenSet = await client.callback(
     process.env.AUTH0_REDIRECT_URI,
     params,
