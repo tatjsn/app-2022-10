@@ -18,8 +18,6 @@ export default async function handler(req, res) {
 
   const userinfo = await client.userinfo(token);
 
-  console.log(userinfo);
-
   res.setHeader('Content-Type', 'text/html');
   res.send(env.render('app.njk', { userinfo }));
 }
