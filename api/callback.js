@@ -1,19 +1,13 @@
-import { Issuer } from 'openid-client';
-import path from 'path';
 import cookie from 'cookie';
-import { Environment, FileSystemLoader} from 'nunjucks';
+import view from './clients/view.js';
+import auth from './clients/auth.js';
 
 export default async function handler(req, res) {
-  const auth0Issuer = await Issuer.discover(process.env.AUTH0_ISSUER_URL);
-  const client = new auth0Issuer.Client({
-    client_id: process.env.AUTH0_CLIENT_ID,
-    client_secret: process.env.AUTH0_CLIENT_SECRET,
-  });
-
   const { nonce } = cookie.parse(req.headers.cookie);
 
-  const params = client.callbackParams(req.url);
-  const tokenSet = await client.callback(
+  const authClient = await auth();
+  const params = authClient.callbackParams(req.url);
+  const tokenSet = await authClient.callback(
     process.env.AUTH0_REDIRECT_URI,
     params,
     { nonce }
@@ -29,9 +23,5 @@ export default async function handler(req, res) {
       secure: true,
     })
   );
-  const env = new Environment(new FileSystemLoader(
-    path.join(process.cwd(), 'views'))
-  );
-  env.addFilter('date', num => new Date(num).toISOString());
-  res.send(env.render('callback.njk'));
+  res.send(view().render('callback.njk'));
 }
