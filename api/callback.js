@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
   res.setHeader(
     'Set-Cookie',
-    cookie.serialize('token', tokenSet.id_token, {
+    cookie.serialize('token', tokenSet.access_token, {
       httpOnly: true,
       maxAge: tokenSet.expires_in,
       path: '/',
