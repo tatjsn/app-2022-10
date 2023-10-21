@@ -8,5 +8,5 @@ export default async function handler(req, res) {
     console.log('Added ' + result.id);
   }
   
-  return res.send('OK');
+  res.send('OK');
 }

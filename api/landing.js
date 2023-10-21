@@ -8,5 +8,5 @@ export default function handler(req, res) {
   env.addFilter('date', num => new Date(num).toISOString());
 
   res.setHeader('Content-Type', 'text/html');
-  return res.send(env.render('landing.njk'));
+  res.send(env.render('landing.njk'));
 }

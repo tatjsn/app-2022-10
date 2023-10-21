@@ -4,6 +4,7 @@
     { "source": "/hello", "destination": "/api/hello" },
     { "source": "/login", "destination": "/api/login" },
     { "source": "/callback", "destination": "/api/callback" },
+    { "source": "/app", "destination": "/api/app" },
     { "source": "/images/:messageId", "destination": "/api/images" },
     { "source": "/videos/:messageId", "destination": "/api/images" }
   ]

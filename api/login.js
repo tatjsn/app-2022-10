@@ -1,4 +1,6 @@
 import { Issuer } from 'openid-client';
+import crypto from 'crypto';
+import cookie from 'cookie';
 
 export default async function handler(req, res) {
   const auth0Issuer = await Issuer.discover(process.env.AUTH0_ISSUER_URL);
@@ -7,12 +9,21 @@ export default async function handler(req, res) {
     client_secret: process.env.AUTH0_CLIENT_SECRET,
   });
 
-  const state = 'your-random-state';
-  const nonce = 'your-random-nonce';
+  const nonce = crypto.randomBytes(16).toString('hex');
+
+  res.setHeader(
+    'Set-Cookie',
+    cookie.serialize('nonce', nonce, {
+      httpOnly: true,
+      path: '/',
+      sameSite: 'none',
+      secure: true,
+    })
+  );
+
 
   const authorizationUrl = client.authorizationUrl({
     scope: 'openid profile email',
-    state,
     nonce,
     redirect_uri: process.env.AUTH0_REDIRECT_URI,
   });
