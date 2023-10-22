@@ -11,9 +11,8 @@ export default async function handler(req, res) {
       path: '/',
       sameSite: 'none',
       secure: true,
-    })
+    }),
   );
-
 
   const authorizationUrl = (await auth()).authorizationUrl({
     scope: 'openid profile email',

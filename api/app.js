@@ -13,10 +13,10 @@ export default async function handler(req, res) {
   }
 
   const query = await firestore()
-  .collection('hooks')
-  .where('type', '==', 'follow')
-  .get();
-  const items = query.docs.map(doc => doc.data());
+    .collection('hooks')
+    .where('type', '==', 'follow')
+    .get();
+  const items = query.docs.map((doc) => doc.data());
 
   res.setHeader('Content-Type', 'text/html');
   res.send(view().render('app.njk', { items }));

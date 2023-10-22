@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     .orderBy('timestamp', 'desc')
     .limit(20)
     .get();
-  const items = query.docs.map(doc => doc.data());
+  const items = query.docs.map((doc) => doc.data());
 
   res.setHeader('Content-Type', 'text/html');
   res.send(view().render('hello.njk', { items }));

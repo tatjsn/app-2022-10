@@ -16,22 +16,23 @@ export default async function handler(req, res) {
     throw new Exception('Bad request');
   }
 
-  const fetchRes = await fetch('https://api.line.me/v2/bot/message/push',
-    { method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        to: req.body.userId,
-        messages: [{
+  const fetchRes = await fetch('https://api.line.me/v2/bot/message/push', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      to: req.body.userId,
+      messages: [
+        {
           type: 'text',
           text: req.body.message,
-        }],
-      }),
-    }
-  );
-  
+        },
+      ],
+    }),
+  });
+
   if (fetchRes.status !== 200) {
     console.log('Reply status:', fetchRes.status, await fetchRes.json());
     throw new Exception('Reply failed');

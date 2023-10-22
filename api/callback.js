@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const tokenSet = await authClient.callback(
     process.env.AUTH0_REDIRECT_URI,
     params,
-    { nonce }
+    { nonce },
   );
 
   res.setHeader(
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       path: '/',
       sameSite: 'strict',
       secure: true,
-    })
+    }),
   );
   res.send(view().render('callback.njk'));
 }
