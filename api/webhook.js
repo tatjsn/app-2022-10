@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   for (const event of req.body.events) {
     const result = await hooks.add(event);
-    console.log('Added ' + result.id);
+    console.log('Added hooks' + result.id);
   }
   
   res.send('OK');

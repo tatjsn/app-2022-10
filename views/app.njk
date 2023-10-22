@@ -1,6 +1,13 @@
 {% set content %}
-<p>App is coming soon</p>
-<p>Dear {{ userinfo.name }}</p>
+<form action="/post" method="post">
+  <input type="hidden" name="replyToken" value="{{ item.replyToken }}" />
+  <input type="hidden" name="userId" value="{{ item.source.userId }}" />
+  <label for="message">Message:</label>
+  <br />
+  <textarea type="text" name="message" id="message" placeholder="Message to post" autocomplete="off"></textarea>
+  <br />
+  <button type="submit">Submit</button>
+</form>
 {% endset %}
 
 {% include "layout.njk" %}
