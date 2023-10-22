@@ -25,9 +25,12 @@
       {% endif %}
     {% else %}
       <p class="text-xl">
-        Haha Unknown type: {{ item.type }}
+        Unknown type: {{ item.type }}
       </p>
     {% endif %}
+    <p class="text-xs pt-2">
+      {{ item.source.userId }}
+    </p>
     <p class="text-xs pt-2">
       {{ item.timestamp | date }}
     </p>
