@@ -1,20 +1,10 @@
 {% set content %}
-<form action="/post" method="post">
-  <input type="hidden" name="replyToken" value="{{ item.replyToken }}" />
-  <label for="userId">User:</label>
-  <br />
-  <select type="hidden" name="userId" id="userId">
-  {% for item in items %}
-    <option value="{{ item.source.userId }}">{{ item.source.userId }}</option>
-  {% endfor %}
-  </select>
-  <br />
-  <label for="message">Message:</label>
-  <br />
-  <textarea type="text" name="message" id="message" placeholder="Message to post" autocomplete="off"></textarea>
-  <br />
-  <button type="submit">Submit</button>
-</form>
+<p>Select User:</p>
+<ul>
+{% for item in items %}
+  <li><a href="/app/{{ item.source.userId }}">{{ item.source.userId }}</a></li>
+{% endfor %}
+</ul>
 {% endset %}
 
 {% include "layout.njk" %}

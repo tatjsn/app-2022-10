@@ -1,0 +1,49 @@
+{% set content %}
+{% for item in items %}
+  <article class="pt-10 {{ 'bg-slate-50' if item.isReply }}">
+    {%  if item.type == "message" %}
+      {%  if item.message.type == "text" %}
+        <p class="text-xl whitespace-pre-wrap break-words">
+          {{- item.message.text -}}
+        </p>
+      {%  elif item.message.type == "sticker" %}
+        <p class="text-xl">
+          Sticker: {{ item.message.keywords | join(", ") }}
+        </p>
+      {%  elif item.message.type == "image" %}
+        <p class="border-2 rounded-lg overflow-hidden">
+          <img class="w-full" src="/images/{{item.message.id}}" />
+        </p>
+      {%  elif item.message.type == "video" %}
+        <p class="border-2 rounded-lg overflow-hidden">
+          <video class="w-full" controls src="/videos/{{item.message.id}}" />
+        </p>
+      {% else %}
+        <p class="text-xl">
+          Unknown message.type: {{ item.message.type }}
+        </p>
+      {% endif %}
+    {% else %}
+      <p class="text-xl">
+        Unknown type: {{ item.type }}
+      </p>
+    {% endif %}
+    <p class="text-xs pt-2">
+      {{ item.source.userId }}
+    </p>
+    <p class="text-xs pt-2">
+      {{ item.timestamp | date }}
+    </p>
+  </article>
+{% endfor %}
+<form action="/post" method="post">
+  <input type="hidden" name="userId" value="{{ userId }}" />
+  <label for="message">Message:</label>
+  <br />
+  <textarea type="text" name="message" id="message" placeholder="Message to post" autocomplete="off"></textarea>
+  <br />
+  <button type="submit">Submit</button>
+</form>
+{% endset %}
+
+{% include "layout.njk" %}
