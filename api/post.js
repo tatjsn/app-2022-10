@@ -47,5 +47,5 @@ export default async function handler(req, res) {
 
   console.log('Added replies' + result.id);
 
-  res.redirect('/app');
+  res.redirect(303, '/app');
 }

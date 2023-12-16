@@ -20,5 +20,5 @@ export default async function handler(req, res) {
     redirect_uri: process.env.AUTH0_REDIRECT_URI,
   });
 
-  res.redirect(authorizationUrl);
+  res.redirect(303, authorizationUrl);
 }
